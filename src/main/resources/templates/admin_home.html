@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <th:block th:include="/include"></th:block>
+    <style>
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<div th:include="/admin_header"></div>
+<div class="container">
+    <div class="row p-5">
+        <div class="col-md-3">
+            <a th:href="@{/admin/add_books}">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="fa-solid fa-square-plus fa-3x text-primary"></i><br>
+                        <h4>Add Book</h4>
+                        ----------
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+        <div class="col-md-3">
+            <a th:href="@{/admin/all_books}">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="fa-solid fa-book fa-3x text-danger"></i><br>
+                        <h4>All Books</h4>
+                        ----------
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a th:href="@{/admin/order}">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="fa-solid fa-bag-shopping fa-3x text-warning"></i><br>
+                        <h4>Order</h4>
+                        ----------
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a th:href="@{/logout}" data-toggle="modal" data-target="#exampleModal">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="fa-solid fa-right-from-bracket fa-3x text-success"></i><br>
+                        <h4>Logout</h4>
+                        ----------
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

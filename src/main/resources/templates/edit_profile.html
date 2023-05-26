@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <th:block th:include="/include"></th:block>
+</head>
+<body style="background-color: #f0f1f2">
+<div th:include="/header"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card mt-2">
+
+                <div class="card-header text-center">
+                    <h4>Edit Profile</h4>
+
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/update_user(id=${loggedUser.id})}" method="post">
+                        <div class="form-group">
+                            <label for="username">Email Username</label> <input type="text"
+                                                                                class="form-control" id="username"
+                                                                                name="name"
+                                                                                aria-describedby="emailHelp"
+                                                                                placeholder="Enter Username"
+                                                                                th:value="${loggedUser.name }" required>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email Email Address</label> <input
+                                type="email" class="form-control" id="exampleInputEmail1"
+                                name="email" aria-describedby="emailHelp"
+                                placeholder="Enter email" th:value="${loggedUser.email}" required>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Enter Password</label> <input
+                                type="password" class="form-control" id="exampleInputPassword1"
+                                name="password" placeholder="Password"
+                                th:value="${loggedUser.password }" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Enter Phone</label> <input type="phone" class="form-control" id="phone"
+                                                                          name="phone" aria-describedby="emailHelp"
+                                                                          placeholder="Enter Phone"
+                                                                          th:value="${loggedUser.phone}" required>
+
+                        </div>
+
+                        <div class="container text-center">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:include="/footer"></div>
+</body>
+</html>

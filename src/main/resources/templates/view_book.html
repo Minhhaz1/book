@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Details</title>
+    <th:block th:include="/include"></th:block>
+</head>
+<body style="background-color: #f0f1f2">
+<div th:include="/header"></div>
+
+
+<div class="container p-3">
+    <div class="row" th:object="${book}">
+        <div class="col-md-6 text-center p-5 border bg-white">
+            <img alt="" th:src="@{/book/{photo}(photo=${book.photo})}"
+                 style="height: 150px; width: 150px">
+            <h4 class="mt-3">
+                Book Name:<span class="text-success" th:text="*{name}"></span>
+            </h4>
+            <h4>
+                Author Name: <span class="text-success" th:text="*{author}"></span>
+            </h4>
+            <h4>
+                Category:<span class="text-success" th:text="*{category}"></span>
+            </h4>
+        </div>
+
+        <div class="col-md-6 text-center p-5 border bg-white">
+            <h2 th:text="*{name}"></h2>
+            <div class="row">
+                <div class="col-md-4 text-danger p-2">
+                    <i class="fa-solid fa-money-bill-wave fa-2x"></i>
+                    <p>Cash on Delivery</p>
+                </div>
+                <div class="col-md-4 text-danger p-2">
+                    <i class="fa-solid fa-rotate-left fa-2x"></i>
+                    <p>Return Available</p>
+                </div>
+                <div class="col-md-4 text-danger p-2">
+                    <i class="fas fa-truck-moving fa-2x"></i>
+                    <p>Free Available</p>
+                </div>
+            </div>
+            <div class="text-center text-white">
+                <a th:href="@{/cart(bid=${book.id}, uid=${session.loggedUser.id})}"
+                   class="btn btn-danger btn-sm ml-2" th:if="${session.loggedUser != null}"
+                   data-toggle="modal" data-target="#exampleModal0">
+                    <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+                </a>
+                <a th:href="@{/login}" class="btn btn-danger btn-sm ml-2"
+                   th:if="${session.loggedUser == null}">
+                    <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+                </a>
+                <a class="btn btn-success ml-2">Price: <i
+                    class="fa-sharp fa-solid fa-dollar-sign" th:text="*{price}"></i>
+            </a>
+            </div>
+        </div>
+        <!-- Add Cart Modal -->
+        <div class="modal fade" id="exampleModal0" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" th:if="${session.loggedUser}">
+                        <div class="text-center">
+                            <h4>Are you sure to add this book to cart?</h4>
+                            <button type="button" class="btn btn-secondary"
+                                    data-dismiss="modal">No</button>
+                            <a th:href="@{/cart(bid=${book.id}, uid=${session.loggedUser.id})}" type="button" class="btn btn-primary">Yes</a>
+                        </div>
+                    </div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Add Book Modal -->
+    </div>
+</div>
+
+<div th:include="/footer"></div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recent Books</title>
+    <th:block th:include="/include"></th:block>
+</head>
+<body style="background-color: #f0f1f2">
+<div th:include="/header"></div>
+
+<div class="container mt-1">
+    <h3 class="text-center">Recent Books</h3>
+    <div class="row text-center">
+        <div class="col-md-3 " th:each="book, iterStat : ${recentBooks}" th:if="${iterStat.index} &lt; 16">
+            <div class="card crd-ho">
+                <div class="card-body text-center">
+                    <img alt="" th:src="@{/book/{photo}(photo=${book.photo})}"
+                         style="width: 150px; height: 200px;" class="img-thumblin">
+                    <p th:text="${book.name}"></p>
+                    <p th:text="${book.author}"></p>
+                    <p>Categories:
+                        <span th:text="${book.category}"></span>
+                    </p>
+                    <div class="row">
+                        <a th:href="@{/login}" class="btn btn-danger btn-sm ml-2"
+                           th:if="${session.loggedUser == null}">
+                            <i class="fa-solid fa-cart-shopping"></i> Cart
+                        </a>
+                        <a th:href="@{/cart(bid=${book.id}, uid=${session.loggedUser.id})}"
+                           class="btn btn-danger btn-sm ml-2" th:if="${session.loggedUser != null}"
+                           data-toggle="modal" data-target="#exampleModal2">
+                            <i class="fa-solid fa-cart-shopping"></i> Cart
+                        </a>
+                        <a th:href="@{/view_book(bid=${book.id})}" class="btn btn-success btn-sm ml-2">
+                            <i class="fa-solid fa-circle-info"></i> Details
+                        </a>
+                        <a class="btn btn-danger btn-sm ml-1">
+                            <i class="fa-sharp fa-solid fa-dollar-sign"></i> <span
+                                th:text="${book.price}"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" th:if="${session.loggedUser}">
+                                <div class="text-center">
+                                    <h4>Are you sure to add this book to cart?</h4>
+                                    <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">No
+                                    </button>
+                                    <a th:href="@{/cart(bid=${book.id}, uid=${session.loggedUser.id})}" type="button"
+                                       class="btn btn-primary">Yes</a>
+                                </div>
+                            </div>
+                            <div class="modal-footer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:include="/footer"></div>
+</body>
+</html>

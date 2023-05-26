@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <th:block th:include="/include"></th:block>
+    <style>
+        .back-img {
+            background: url("/img/b.jpg");
+            height: 55vh;
+            width: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .crd-ho:hover {
+            background-color: #fcf7f7;
+        }
+    </style>
+</head>
+<body>
+<div th:include="/header"></div>
+
+<div class="row text-center">
+      <div class="col-sm-3 " th:each="book : ${books}">
+        <div class="card crd-ho">
+          <div class="card-body text-center">
+            <img alt="" th:src="@{/book/{photo}(photo=${book.photo})}"
+                 style="width: 150px; height: 200px;" class="img-thumblin">
+            <p th:text="${book.name}"></p>
+            <p th:text="${book.author}"></p>
+            <p>Categories:
+              <span th:text="${book.category}"></span>
+            </p>
+            <div class="row">
+              <a th:href="@{/login}" class="btn btn-danger btn-sm ml-2"
+                 th:if="${session.loggedUser == null}">
+                <i class="fa-solid fa-cart-shopping"></i> Cart
+              </a>
+              <a th:href="@{/cart(bid=${book.id}, uid=${session.loggedUser.id})}"
+                 class="btn btn-danger btn-sm ml-2" th:if="${session.loggedUser != null}">
+                <i class="fa-solid fa-cart-shopping"></i> Cart
+              </a>
+              <a th:href="@{/view_book(bid=${book.id})}" class="btn btn-success btn-sm ml-2">
+                <i class="fa-solid fa-circle-info"></i> Details
+              </a>
+              <a class="btn btn-danger btn-sm ml-1">
+                <i class="fa-sharp fa-solid fa-dollar-sign"></i> <span
+                      th:text="${book.price}"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+<div th:include="/footer"></div>
+</body>
+</html>

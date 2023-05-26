@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <th:block th:include="/include"></th:block>
+</head>
+<body style="background-color: #f7f7f7">
+<div th:include="/header"></div>
+
+<div class="container p-3">
+    <div class="row p-2">
+        <div class="col-md-6 text-center p-5 border bg-white">
+            <div class="card">
+                <h3 class="text-center text-success">Your Items</h3>
+                <div th:if="${succMsg!=null}" class="text-center text-success" th:text="${succMsg}"></div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Book Name</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="book : ${booksAdded}">
+                            <td th:text="${book.name}"></td>
+                            <td th:text="${book.author}"></td>
+                            <td th:text="${book.price}"></td>
+                            <td>
+                                <a th:href="@{/remove_book(bid=${book.id}, uid=${session.loggedUser.id})}"
+                                   class="btn btn-sm btn-danger">Remove</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Total Price:</td>
+                            <td></td>
+                            <td></td>
+                            <td th:text="${total}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <form th:action="@{/order(uid=${loggedUser.id})}" method="post" th:object="${order}">
+                        <h3 class="text-center text-success">Your Order Details...</h3>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Name</label> <input type="text"
+                                                           class="form-control"
+                                                           name="name"
+                                                           th:value="${loggedUser.name}"
+                                                           placeholder="Name">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Email</label> <input type="email"
+                                                            class="form-control"
+                                                            id="inputPassword4" name="email"
+                                                            placeholder="Email"
+                                                            th:value="${loggedUser.email }">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Mobile</label> <input type="number"
+                                                             class="form-control"
+                                                             placeholder="Number"
+                                                             name="phone"
+                                                             th:value="${loggedUser.phone }">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Address</label> <input type="text"
+                                                              class="form-control"
+                                                              name="address"
+                                                              placeholder="Address" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Land Mark</label> <input type="text"
+                                                                class="form-control"
+                                                                name="landmark"
+                                                                placeholder="Land Mark" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>City</label> <input type="text"
+                                                           class="form-control"
+                                                           name="city"
+                                                           placeholder="City" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>State</label> <input type="text"
+                                                            class="form-control"
+                                                            name="state"
+                                                            placeholder="State" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Zip</label> <input type="text"
+                                                          class="form-control"
+                                                          placeholder="Pincode"
+                                                          name="pincode" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Payment Type</label> <select
+                                class="form-control" name="payment">
+                            <option value="COD">Cash on Delivery</option>
+                        </select>
+                        </div>
+
+                        <div class="text-center">
+                            <button class="btn btn-warning" type="submit">Order Now</button>
+                            <a th:href="@{/}" class="btn btn-success">Continue
+                                Shopping</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="/footer"></div>
+</body>
+</html>

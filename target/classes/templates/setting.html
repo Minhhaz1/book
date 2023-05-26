@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Setting Page</title>
+    <th:block th:include="/include"></th:block>
+</head>
+<body style="background-color: #f0f1f2">
+<div th:include="/header"></div>
+<h1>
+
+</h1>
+</br>
+<div class="container mb-5">
+    <div class="row mb-5">
+        <div class="col-md-4 ">
+            <a th:href="@{/edit_profile}">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="text-primary">
+                            <i class="fa-solid fa-user-pen fa-3x"></i>
+                        </div>
+                        <h4>
+                            Edit Profile
+                        </h4>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a th:href="@{/order}">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="text-danger">
+                            <i class="fa-solid fa-gift fa-3x"></i>
+                        </div>
+                        <h4>My Orders</h4>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 ">
+            <a href="" data-toggle="modal" data-target="#exampleModal1">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <div class="text-success">
+                            <i class="fa-sharp fa-solid fa-phone-volume fa-3x"></i>
+                        </div>
+                        <h4>Help Center</h4>
+
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div th:include="/footer"></div>
+</body>
+</html>
